@@ -8,7 +8,6 @@ import com.google.gson.annotations.SerializedName;
 @Entity
 public class PostsModel {
 
-	@NonNull
 	@PrimaryKey
 	@SerializedName("id")
 	private int id;

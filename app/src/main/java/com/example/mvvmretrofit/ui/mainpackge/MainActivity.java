@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
          mainViewModel= ViewModelProviders.of(this).get(MainViewModel.class);
 
-        mainViewModel.getData();
+        //mainViewModel.getData();
 
         observeToLiveData();
 

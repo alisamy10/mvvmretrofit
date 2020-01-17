@@ -22,46 +22,16 @@ public class MainViewModel extends ViewModel {
 
    public MutableLiveData <List<PostsModel>>data = new MutableLiveData<>();
    public MutableLiveData <String> msg=new MutableLiveData<>();
+   public RepositryPost repositryPost=new RepositryPost();
 
-    public void getData(){
+   public  MainViewModel (){
+       data=repositryPost.data;
+       repositryPost.getData();
 
-        ApiManger.getApis().getPostModel().subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread()).subscribe(new SingleObserver<List<PostsModel>>() {
-            @Override
-            public void onSubscribe(Disposable d) {
+   }
 
-            }
-
-            @Override
-            public void onSuccess(final List<PostsModel> postsModels) {
-                //save Data to room
-
-                data.setValue(postsModels);
-                Thread thread =new Thread(){
-                    @Override
-                    public void run(){
-                        super.run();
-                        MyDataBase.getInstance().postDao().cahePosts(postsModels);
-                    }
-                };
-                thread.start();
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                msg.setValue("jhjh"+e.getLocalizedMessage());
-                //getDatafromroom
-                Thread thread =new Thread(){
-                    @Override
-                    public void run() {
-                        super.run();
-                        MyDataBase.getInstance().postDao().getAllPosts();
-                    }
-                };
-                thread.start();
-
-            }
-        });
-
+   public void getData(){
+            repositryPost.getData();
     }
+
 }
